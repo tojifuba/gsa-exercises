@@ -61,3 +61,44 @@ Now, try simulating inexact matches and run `bwa` again with these. Inspect the 
 
 ## CIGAR strings
 
+I simulate random mutations to a sampled sequence using this Python function:
+
+```python
+def mutate(seq, d):
+	seq = list(seq)
+	for _ in range(d):
+		mutation = random.randrange(3)
+		position = random.randrange(len(seq))
+		if mutation == 0:
+			seq[position] = random.choice(DNA)
+		elif mutation == 1:
+			del seq[position]
+		else:
+			seq = seq[:position] + [random.choice(DNA)] + seq[position:]
+	return ''.join(seq)
+```
+
+Strictly speaking it doesn’t necessarily give you a string at edit-distance *d* since mutations only have a 3/4 chance of changing the nucleotide at the given position, but *d* is a max distance anyway.
+
+
+
+```
+======X=D=	8M1D1M	GCGCACGCGG	GCGCACGCG
+======X=X=	10M	TTGGGATCTA	TTGGGAGCAA
+========DI	8M1D1I	CGAGAAAGTG	CGAGAAAGA
+=X====X===	10M	ATTAGTGTAC	ACTAGTATAC
+========D=	8M1D1M	TCTATCTACG	TCTATCTAG
+====X===I=	8M1I1M	GGATATACGT	GGATGTACTG
+==I=====X=	2M1I7M	TCTCTTGATA	TCGTCTTGCT
+X====I====	5M1I4M	GCGTTCAGCC	ACGTTCCAGC
+=X=====D==	7M1D2M	AAAAGCGAGT	ACAAGCGGT
+X========I	9M1I	ACGCCTCAAG	TCGCCTCAAT
+```
+
+## FASTA files
+
+At some point you will have to write a read mapper that can read in a FASTA files, so you might as well write a parser for it now… Write a parser that reads a FASTA file into a structure where you have information about the name of each sequence—taken from the FASTA header—and where you have the entire sequences stored.
+
+## FASTQ files
+
+You will also have to read FASTQ files at some point, so write a parser for it now. Write a parser that lets you iterate through all the reads in the FASTQ file.
