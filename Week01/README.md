@@ -80,7 +80,24 @@ def mutate(seq, d):
 
 Strictly speaking it doesn’t necessarily give you a string at edit-distance *d* since mutations only have a 3/4 chance of changing the nucleotide at the given position, but *d* is a max distance anyway.
 
+An alternative approach would be to simulate a CIGAR string:
 
+```python
+def simulate_cigar(n, d):
+	cigar = ['='] * n
+	for _ in range(d):
+		mutation = random.randrange(3)
+		position = random.randrange(n)
+		if mutation == 0:
+			cigar[position] = 'X'
+		elif mutation == 1:
+			cigar[position] = 'D'
+		else:
+			cigar[position] = 'I'
+	return ''.join(cigar)
+```
+
+Strictly speaking, this doesn’t simulate a CIGAR string since such a string does not have the edit symbols represented by one character per position in the read but represent these as sequences of numbers and symbols, but we can create these strings and then compress them into real CIGAR strings. We can also use the simulated strings to modify reads according to the CIGAR. Below I have simulated strings (first column) that compresses to the CIGAR strings in the second columns and I have used them to modify the sequence in the third column into the strings in the fourth column.
 
 ```
 ======X=D=	8M1D1M	GCGCACGCGG	GCGCACGCG
@@ -94,6 +111,10 @@ X====I====	5M1I4M	GCGTTCAGCC	ACGTTCCAGC
 =X=====D==	7M1D2M	AAAAGCGAGT	ACAAGCGGT
 X========I	9M1I	ACGCCTCAAG	TCGCCTCAAT
 ```
+
+Write functions to compress such simulated strings into proper CIGAR sequences and to modify a read according to the CIGAR.
+
+Use this code to simulate reads in FASTQ format and map them with `bwa`. Compare the CIGARs that `bwa` finds to those you have simulated.
 
 ## FASTA files
 
