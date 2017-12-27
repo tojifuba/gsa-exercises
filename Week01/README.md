@@ -31,3 +31,33 @@ $ python simulate-fastq.py -n 10 -m 100 -l exact-samples.txt ref.fa > exact-samp
 
 The [exact-samples.txt](exact-samples.txt) file contains four columns, the first is the chromosome I have sampled from, the second the index into the chromosome where I sampled, the third is the sub-sequence of the chromosome, and the fourth column contains a mutated version of the sampled sequence. For the exact matches, the third and the fourth columns differ, but you can simulate inexact subsequences if you use the option `-d` with `simulate-fastq.py`.
 
+Before you can use `bwa` for read-mapping you must index the reference genome. You do this with the command
+
+```sh
+$ bwa index ref.fa
+```
+
+This creates a number of files that `bwa` will use when mapping reads against the reference.
+
+```sh
+$ ls ref.*
+ref.fa     ref.fa.amb ref.fa.ann ref.fa.bwt ref.fa.pac ref.fa.sa
+```
+
+```sh
+$ bwa mem ref.fa exact-samples.fq
+```
+
+You can now compare the positions where we got the reads from with the matches that bwa finds:
+
+```sh
+$ less -S exact-samples.txt
+$ bwa mem ref.fa exact-samples.fq | less -S
+```
+
+Check that these matches.
+
+Now, try simulating inexact matches and run `bwa` again with these. Inspect the hits and the CIGAR strings.
+
+## CIGAR strings
+

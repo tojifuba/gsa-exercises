@@ -31,7 +31,7 @@ def sample_sequence(seqs, record, m, d):
 	seq = record[seq_id]
 	idx = random.randrange(len(seq) - m)
 	sample = seq[idx:(idx+m)]
-	return (seq_id, idx, sample, mutate(sample, d))
+	return (seq_id, idx + 1, sample, mutate(sample, d)) # + 1 for 1-indexing
 
 
 def mutate(seq, d):
