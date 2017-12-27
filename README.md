@@ -1,2 +1,2 @@
-# gsa-exercises
-Exercises for Genome Scale Algorithms
+# Exercises for Genome Scale Algorithms
+
