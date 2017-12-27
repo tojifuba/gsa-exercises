@@ -15,7 +15,7 @@ $ cd bwa
 $ make
 ```
 
-For some test data, download [ref.fa](ref.fa), [exact-samples.fq](exact-samples.fq), and [exact-samples.txt](exact-samples.txt). The first contain a reference genome I have simulated using the script [simulate-fasta.py](simulate-fast.py). I ran the command
+For some test data, download [ref.fa](ref.fa), [exact-samples.fq](exact-samples.fq), and [exact-samples.txt](exact-samples.txt). The first contain a reference genome I have simulated using the script [simulate-fasta.py](simulate-fasta.py). I ran the command
 
 ```sh
 $ python simulate-fasta.py -n 20 -m 10000 > ref.fa
@@ -23,7 +23,7 @@ $ python simulate-fasta.py -n 20 -m 10000 > ref.fa
 
 to create 20 chromosomes of length 10,000 each. You can use the script to simulate your own data for more testing.
 
-The other two files contain strings that match exactly in the reference genome. I have sampled them from the reference using the [simulate-fastq.py](simulate-fast.py) script using this command:
+The other two files contain strings that match exactly in the reference genome. I have sampled them from the reference using the [simulate-fastq.py](simulate-fastq.py) script using this command:
 
 ```sh
 $ python simulate-fastq.py -n 10 -m 100 -l exact-samples.txt ref.fa > exact-samples.fq
