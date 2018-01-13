@@ -10,7 +10,7 @@ Modify your trie code to do this.
 
 ## Building a suffix tree from a suffix array
 
-Prove that successive indices when you move along a non-brancing path in the suffix trie differ by exactly one. That is, if you take a sequence of non-branching nodes in trie, you get an interval of indices into your string.
+Prove that successive indices when you move along a non-branching path in the suffix trie differ by exactly one. That is, if you take a sequence of non-branching nodes in trie, you get an interval of indices into your string.
 
 To build a suffix tree from a suffix trie, you simply have to compress paths. If your nodes contain both a from and to index you can start out with your initial trie and simply identify non-branching paths and replace them with a single node consisting of the same interval as the path.
 
