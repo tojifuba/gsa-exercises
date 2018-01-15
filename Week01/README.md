@@ -97,7 +97,9 @@ def simulate_cigar(n, d):
 	return ''.join(cigar)
 ```
 
-Strictly speaking, this doesn’t simulate a CIGAR string since such a string does not have the edit symbols represented by one character per position in the read but represent these as sequences of numbers and symbols, but we can create these strings and then compress them into real CIGAR strings. We can also use the simulated strings to modify reads according to the CIGAR. Below I have simulated strings (first column) that compresses to the CIGAR strings in the second columns and I have used them to modify the sequence in the third column into the strings in the fourth column.
+Here I use an extended version of CIGAR where we differentiate between matches and mismatches for substitutions (what we would normally just write as `M`). Matches are indicated with `=` and mismatches with `X`. We need to know which it is if we are going to modify reads accordingly, but we should probably match them back to `M` later for compatibility with `bwa` if we want to compare.
+
+This function actually doesn’t simulate a CIGAR string since such a string does not have the edit symbols represented by one character per position in the read but represent these as sequences of numbers and symbols, but we can create these strings and then compress them into real CIGAR strings. We can also use the simulated strings to modify reads according to the CIGAR. Below I have simulated strings (first column) that compresses to the CIGAR strings in the second columns and I have used them to modify the sequence in the third column into the strings in the fourth column.
 
 ```
 ======X=D=	8M1D1M	GCGCACGCGG	GCGCACGCG
