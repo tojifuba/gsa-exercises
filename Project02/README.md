@@ -2,7 +2,7 @@
 
 You should implement a suffix tree construction algorithm. You can chose to implement the naive O(n<sup>2</sup>) time construction algorithm as discussed in class, or McCreight suffix tree O(n) time construction algorithm Write the suffix tree as an abstract data structure that can be reused in project 3, and then write an application that uses the suffix tree exact pattern search algorithm (similar to slowscan) to report all indices in a string where a given pattern occurs.
 
-The algorithm should be implemented in a program named `search-st`. This program should take two arguments, the filename of a file containing the string to search in and the pattern to search for. The program should output the positions where the second argument appears in the string in the first. E.g. if the file mississippi.txt contains the string "mississippi\n", then the programs should be called as:
+The algorithm should be implemented in a program named `search-st`. This program should take two arguments, the filename of a file containing the string to search in and the pattern to search for. The program should output the positions where the second argument appears in the string in the first. E.g. if the file mississippi.txt contains the string "mississippi\n", then the program should be called as:
 
 ```sh
 search-st mississippi.txt ss
